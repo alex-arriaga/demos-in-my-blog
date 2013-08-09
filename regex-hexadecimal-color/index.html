@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>The HTML5 Herald</title>
+  <meta name="description" content="A demo using regular expressions with javascript">
+  <meta name="author" content="Alex Arriaga">
+  <link rel="stylesheet" href="css/style.css">
+  <!--[if lt IE 9]>
+  	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+<body>
+	<div class="container">
+		<p>This is an example of how to use a regular expressions to validate HTML hexadecimal colors</p>
+
+		<div class="testing">
+			<input id="links_color" name="links_color" value="#445566" />
+			<a id="validate" class="btn" href="#">Validate</a>
+			<div id="errors_output"></div>
+		</div>
+		<p>For more interesting articles see my personal blog: <a href="http://www.alex-arriaga.com/" target="_blank">http://www.alex-arriaga.com/</a>.</p>
+	</div>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery.1.9.1.min.js"><\/script>')</script>
+	<script>
+	(function($){
+		$(document).on('ready', function(){
+			function checkRegexp ( o, regexp, n, errors_output ) {
+				if ( !( regexp.test( o.val() ) ) ) {
+					o.addClass( "ui-state-error" ); // Uses a jQuery UI class
+					errors_output.html("Error: " + n);
+
+					return false;
+				} else {
+					errors_output.html("Correct! ");
+					return true;
+				}
+			}
+
+			$("#validate").on('click',function(){
+				var links_color = $("#links_color"),	// This read a DOM object (input)
+				errors_output = $("#errors_output");
+
+				var valid = checkRegexp(
+						links_color,
+						/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/,
+						"Enter valid colors like #42AB56",
+						errors_output
+						);
+			});
+
+		}); // ends document ready
+	})(jQuery);
+	</script>
+</body>
+</html>
