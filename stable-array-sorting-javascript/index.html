@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>How to get same results when sorting JavaScript objects or strings in all browsers</title>
+	<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+</head>
+<body>
+	<div id="items" class="container"></div>
+	<script type="text/javascript" src="../assets/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="../assets/js/moment.min.js"></script>
+	<script type="text/javascript" src="data.js"></script>
+	<script type="text/javascript" src="sort.js"></script>
+	<script type="text/javascript">
+	(function($){
+		function items2HTML(dataInputArray){
+			var items = [];
+
+			items.push('<div class="well"><ul>');
+			for(var i = 0, lengthData = dataInputArray.length; i < lengthData; i++){
+
+				items.push('<li>'
+					+ '<a href="">' + dataInputArray[i].title + '</a><br>'
+					// + '<strong>Topic: </strong>' + dataInputArray[i].topic
+					+ ' <strong>Date: </strong>' + dataInputArray[i].date
+					+ ' <strong>Key: </strong>' + dataInputArray[i].key
+					+ '</li>');
+			}
+			items.push('</ul></div>');
+
+			return items;
+		}
+
+		// Adding the items to the HTML
+		var $items = $('#items');
+		// 1. Before sorting (same result)
+		var dataTemp = clone(dataWithKeys);
+	/*	$items.append('<h2>Before sorting</h2>');
+		$items.append(items2HTML(dataTemp).join(''));
+
+
+		// 2. After sorting by title not consistent (different output in browsers)
+		dataTemp = clone(dataWithKeys);
+		dataTemp.sort(sortByTitleNotConsistentASC);
+		$items.append('<h2>After sorting</h2>');
+		$items.append(items2HTML(dataTemp).join(''));
+
+		// 3. After sorting by title consistent
+		dataTemp = clone(dataWithKeys);
+		dataTemp.sort(sortByTitleConsistentASC);
+		$items.append('<h2>After sorting</h2>');
+		$items.append(items2HTML(dataTemp).join(''));
+*/
+		// 4. After sorting by date consistent
+		dataTemp = clone(dataWithKeys);
+		dataTemp.sort(sortByDateConsistentASC);
+		$items.append('<h2>After sorting</h2>');
+		$items.append(items2HTML(dataTemp).join(''));
+
+
+	})(jQuery);
+	</script>
+</body>
+</html>
